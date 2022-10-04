@@ -1,0 +1,64 @@
+﻿@model IEnumerable<prjWebApplication1.Models.Order>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>訂單一覽表</h1>
+<div>
+    @using (Html.BeginForm())
+    {
+        @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary"/>
+    }
+</div>
+<p>
+    <a asp-action="Create">新增訂單</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderRemark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderstatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderRemark)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderstatusId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomId)
+            </td>
+            <td>
+                @Html.ActionLink("修改", "Edit", new { id = item.OrderId }, new { @class = "btn btn-outline-primary" }) |
+                @Html.ActionLink("刪除", "Delete", "Product", new { id = item.OrderId },
+                new { onclick = "return confirm('確定要刪除嗎?')",Class="btn btn-outline-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
